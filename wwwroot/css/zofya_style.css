@@ -1,0 +1,64 @@
+.brand-zofya{
+    font-family: 'Roboto', sans-serif;    
+    text-transform: uppercase;
+    letter-spacing: 0.225em;
+}
+
+.brand-zofya-logo{
+    font-weight: 400;    
+}
+
+.background-dark{
+    position: fixed;
+    z-index: 20;
+    width: 100%;
+    background-color: rgba(34,40,49, .8)!important;
+}
+
+.navbar-dark:hover, .navbar-nav:hover,
+.nav-link:hover, .link-text-style:hover,
+.icon-style:hover, .footer-link:hover{    
+    color: hsla(0, 0%, 100%, .9)!important;
+}
+
+.navbar-dark, .navbar-nav,
+.nav-link, .text-reset,
+.footer-link{
+    color: hsla(0, 0%, 100%, .55)!important;  
+}
+
+.icon-style{
+    margin-right: -2px;    
+    color: hsla(0, 0%, 100%, .55);  
+}
+
+.link-text-style{
+    font-size: 9px;
+}
+
+@media (min-width: 992px) {    
+
+    .link-text-style, .dropdown-style{
+        font-size: 15px;
+    }    
+}
+
+.badge{
+    font-size: .6em;
+}
+
+.translate-middle {
+    transform: translate(-8%,-70%)!important;
+}
+
+@media (min-width: 576px) {   
+
+    .link-text-style, .dropdown-style{
+        font-size: 13px;
+    }       
+       
+}
+
+.zofya-text{
+    letter-spacing: 0.10em;
+}

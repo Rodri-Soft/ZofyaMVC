@@ -1,0 +1,158 @@
+.carousel-caption {
+    position: absolute; 
+    right: 15%;
+    top: 30%;     
+    left: 20%;
+    right: 30%;        
+    color: #fff;
+    text-align: left;    
+}
+
+#main .mask{
+    background: linear-gradient(
+                      to bottom,
+                      hsla(0, 0%, 0%, 0.1) 10%,
+                      hsla(0, 0%, 0%, 0.8)
+                    );
+}
+
+@media (min-width: 1200px) {
+    .carousel-item{
+        max-height: 650px;   
+        object-fit: cover; 
+    }
+        
+}
+
+.card{
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.products-style-images{
+    margin-bottom: 10px;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center top;    
+    border-bottom-right-radius: calc(.5rem - 1px);
+    border-bottom-left-radius: calc(.5rem - 1px);
+
+}
+
+.mask{
+    background-color: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    
+}
+
+.card-main-text{
+
+    background: rgba(0, 0, 0, .5);;
+    font-family: 'Roboto', sans-serif;    
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    padding: .2vh .2vh;
+}
+
+@media (min-width: 768px) {
+    .carousel-caption h1{
+        font-size: 50px;
+    }        
+
+    .card{
+        margin-right: 0%;
+        margin-left: 0%;
+    }
+
+    .products-style-images{
+        
+        border-bottom-right-radius: calc(.5rem - 1px);
+        border-bottom-left-radius: calc(.5rem - 1px);
+    
+    }
+
+    #zofya-mision img{
+        max-height: 500px;
+        object-fit: cover;
+        object-position: center 35%;
+    }
+}
+
+.video-style{
+  padding: 0;  
+}
+
+.mask-mision, .mask-video{
+    background-color: rgba(0, 0, 0, 0.4);    
+}
+
+#zofya-mision img{
+    max-width: 100%;
+}
+
+.zofya-mision-text{
+    position: absolute;     
+    top: 10%;     
+    left: 0%;
+    right: 0%;        
+    color: white;
+    text-align: center;
+}
+
+.zofya-mision-text h2{
+    font-size: 18px;
+    margin-bottom: 20px!important;
+}
+
+.zofya-mision-text p{
+    font-size: 10px;
+    margin-top: 5px!important;
+    margin-bottom: 6px!important;
+}
+
+.zofya-mision-text button{
+    font-size: 10px;    
+    margin-top: 5px;
+}
+
+@media (min-width: 576px) {
+
+    .zofya-mision-text{
+        color: white;
+        position: absolute;
+        top: 30%;        
+    }
+    
+    .carousel-caption p {
+        font-size: 16px;
+    }
+       
+}
+
+@media (min-width: 545px) {
+    .zofya-mision-text h2{
+        font-size: 30px;
+        margin-bottom: 20px!important;
+    }
+    
+    .zofya-mision-text p{
+        font-size: 16px;
+        margin-top: 5px!important;
+        margin-bottom: 6px!important;
+    }
+    
+    .zofya-mision-text button{
+        font-size: 14px;        
+        width: 30%;
+        margin-top: 5px;
+    }
+}
+
+.button-signup{
+    background-color: black;
+    width: 40%;
+}
+
+.button-signup:hover{
+    background-color: #262626;
+}
