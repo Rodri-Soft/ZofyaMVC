@@ -63,38 +63,38 @@
                     </div>
 
                     <!-- Name input -->
-                    <div class="form-outline">
+                    <div class="form-outline fullname-field">
                         <input type="text" id="validationCustom-register-fullname" class="form-control" />
-                        <label class="form-label" for="validationCustom-register-fullname">Fullname</label>
-                        <div class="invalid-feedback">Invalid Fullname.</div>
+                        <label class="form-label" for="validationCustom-register-fullname">Full Name</label>
+                        <div id="invalidFullname" class="invalid-feedback">Invalid Full Name.</div>
                     </div>
 
                     <!-- Username input -->
-                    <div class="form-outline">
-                        <input type="number" id="validationCustom-register-phone" class="form-control" />
+                    <div class="form-outline phone-field">                        
+                        <input type="text" id="validationCustom-register-phone" class="form-control" />
                         <label class="form-label" for="validationCustom-register-phone">Phone</label>
-                        <div class="invalid-feedback">Invalid Phone.</div>
+                        <div id="invalidPhone" class="invalid-feedback">Invalid Phone.</div>                        
                     </div>
 
                     <!-- Email input -->
-                    <div class="form-outline">
+                    <div class="form-outline email-field">
                         <input type="email" id="validationCustom-register-email" class="form-control" />
                         <label class="form-label" for="validationCustom-register-email">Email</label>
-                        <div class="invalid-feedback">Invalid Email.</div>
+                        <div id="invalidEmail" class="invalid-feedback">Invalid Email.</div>
                     </div>
 
                     <!-- Password input -->
-                    <div class="form-outline">
+                    <div class="form-outline password-field">
                         <input type="password" id="validationCustom-register-password" class="form-control" />
                         <label class="form-label" for="validationCustom-register-password">Password</label>
-                        <div class="invalid-feedback">Invalid Password.</div>
+                        <div id="invalidPassword" class="invalid-feedback">Invalid Password.</div>
                     </div>
 
                     <!-- Repeat Password input -->
-                    <div class="form-outline">
+                    <div class="form-outline repassword-field">
                         <input type="password" id="validationCustom-register-repassword" class="form-control" />
                         <label class="form-label" for="validationCustom-register-repassword">Repeat password</label>
-                        <div class="invalid-feedback">Invalid Password.</div>
+                        @* <div class="invalid-feedback">Invalid Password.</div> *@
                     </div>
 
                     <!-- Checkbox -->                    
@@ -104,7 +104,7 @@
                             <div class="column">
                                 <input class="form-check-input me-2" type="checkbox" id="registerCheck"
                                     aria-describedby="registerCheckHelpText" data-mdb-toggle="modal"
-                                    data-mdb-target="#modalTerms" />
+                                    data-mdb-target="#modalTerms" onclick="checkedTerms();"/>
                                 <label id="check-label" class="form-check-label" for="registerCheck" data-mdb-toggle="modal"
                                     data-mdb-target="#modalTerms">
                                     I have read and agree to the zofya terms
