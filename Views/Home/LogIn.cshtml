@@ -66,35 +66,35 @@
                     <div class="form-outline fullname-field">
                         <input type="text" id="validationCustom-register-fullname" class="form-control" />
                         <label class="form-label" for="validationCustom-register-fullname">Full Name</label>
-                        <div id="invalidFullname" class="invalid-feedback">Invalid Full Name.</div>
+                        <div id="invalidFullname" class="invalid-feedback"></div>
                     </div>
 
                     <!-- Username input -->
                     <div class="form-outline phone-field">                        
                         <input type="text" id="validationCustom-register-phone" class="form-control" />
                         <label class="form-label" for="validationCustom-register-phone">Phone</label>
-                        <div id="invalidPhone" class="invalid-feedback">Invalid Phone.</div>                        
+                        <div id="invalidPhone" class="invalid-feedback"></div>                        
                     </div>
 
                     <!-- Email input -->
                     <div class="form-outline email-field">
                         <input type="email" id="validationCustom-register-email" class="form-control" />
                         <label class="form-label" for="validationCustom-register-email">Email</label>
-                        <div id="invalidEmail" class="invalid-feedback">Invalid Email.</div>
+                        <div id="invalidEmail" class="invalid-feedback"></div>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline password-field">
                         <input type="password" id="validationCustom-register-password" class="form-control" />
                         <label class="form-label" for="validationCustom-register-password">Password</label>
-                        <div id="invalidPassword" class="invalid-feedback">Invalid Password.</div>
+                        <div id="invalidPassword" class="invalid-feedback"></div>
                     </div>
 
                     <!-- Repeat Password input -->
                     <div class="form-outline repassword-field">
                         <input type="password" id="validationCustom-register-repassword" class="form-control" />
                         <label class="form-label" for="validationCustom-register-repassword">Repeat password</label>
-                        @* <div class="invalid-feedback">Invalid Password.</div> *@
+                        <div id="invalidRePassword" class="invalid-feedback"></div>
                     </div>
 
                     <!-- Checkbox -->                    
@@ -105,8 +105,7 @@
                                 <input class="form-check-input me-2" type="checkbox" id="registerCheck"
                                     aria-describedby="registerCheckHelpText" data-mdb-toggle="modal"
                                     data-mdb-target="#modalTerms" onclick="checkedTerms();"/>
-                                <label id="check-label" class="form-check-label" for="registerCheck" data-mdb-toggle="modal"
-                                    data-mdb-target="#modalTerms">
+                                <label id="check-label" class="form-check-label" for="registerCheck">
                                     I have read and agree to the zofya terms
                                 </label>
                             </div>
@@ -120,7 +119,7 @@
                         class="btn btn-primary btn-block mb-3">Register</button>
 
                     <div class="text-center">
-                        <a href="#" data-mdb-toggle="modal" data-mdb-target="#modalTerms">Terms and conditions</a>
+                        <a href="#" id="termsLink" data-mdb-toggle="modal" data-mdb-target="#modalTerms">Terms and conditions</a>
                     </div>
 
                     <div class="modal fade" id="modalTerms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,6 +162,23 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onclick="reloadView();">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalErrors" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Errors</h5>
+                                    <button id="button-close-modal-errors" type="button" class="btn-close" data-mdb-dismiss="modal"
+                                        aria-label="Close" onclick="hideModalErrors();"></button>
+                                </div>
+                                <div class="modal-body">                                   
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onclick="hideModalErrors();">Close</button>
                                 </div>
                             </div>
                         </div>

@@ -84,7 +84,8 @@
 }
 
 #button-close-modal-terms,
-#button-close-modal-correctmessage{
+#button-close-modal-correctmessage,
+#button-close-modal-errors{
     background-color: transparent!important;
 }
 
