@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ZofyaMVC.Models
 {
@@ -15,8 +16,12 @@ namespace ZofyaMVC.Models
 
         public int IDUser { get; set; }
         public DateTime? DateOfBith { get; set; }
+
+        [Required(ErrorMessage = "Email Required Field")]
         public string Email { get; set; } = null!;
         public string FullName { get; set; } = null!;
+
+        [Required(ErrorMessage = "Password Required Field")]
         public string Password { get; set; } = null!;
         public string Phone { get; set; } = null!;
 

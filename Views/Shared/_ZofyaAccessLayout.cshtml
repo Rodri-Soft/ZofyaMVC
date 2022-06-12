@@ -35,8 +35,8 @@
                 </a>
                 <ul class="navg-center navbar-nav mb-2 mb-md-0">
                     <li class="nav-item dropdown">
-                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Woman
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,8 +47,8 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Men
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -59,8 +59,8 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Accessories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -77,13 +77,14 @@
 
             <div class="right-elements d-flex align-items-center">
                 <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-heart" style="margin-right: 2px;"></i>
+                    <i class="fa fa-heart"><span id="icon-amount-wishlist"
+                            class="translate-middle badge rounded-pill bg-danger">@ViewData["UserWishList"]</span></i>
                     Wishlist
                 </a>
 
                 <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-cart-shopping" style="margin-right: 0.5px;"><span id="icon-amount-cart-shopping"
-                            class="translate-middle badge rounded-pill bg-danger">@ViewData["UserShoppingCart"]</span></i>
+                    <i class="fa fa-cart-shopping"><span id="icon-amount-cart-shopping"
+                            class="translate-middle badge rounded-pill bg-danger">0</span></i>
                     My Cart
                 </a>
 
@@ -91,13 +92,12 @@
                     <a class="link-text-style text-reset dropdown-toggle d-flex align-items-center" href="#"
                         id="navbar-dropdown-user" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                         <i id="user-account-icon" class="fa fa-user" style="margin-right: 5px;"></i>
-
-                        @ViewData["User"]
-
+                        
+                        @ViewData["User"]                    
+                        
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" style="margin-right: 50%;"
-                        aria-labelledby="navbarDropdown">
-
+                    <ul class="dropdown-menu dropdown-menu-end" style="margin-right: 50%;" aria-labelledby="navbarDropdown">                    
+                                        
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li>
@@ -107,12 +107,9 @@
                                 <a class="dropdown-item" href="#">Settings</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="LogIn">Sign In</a>
-                            </li>
-                            <li>
                                 <a class="dropdown-item" asp-controller="Home" asp-action="LogOut">Logout</a>
                             </li>
-
+                            
                         }
                         else
                         {
@@ -124,7 +121,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>            
     </nav>
 
     @RenderBody()
@@ -177,7 +174,7 @@
                         <div class="dropdown mb-4">
                             <a class="dropdown-toggle footer-link" href="#" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Woman
+                                Mujer
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -189,7 +186,7 @@
                         <div class="dropdown mb-4">
                             <a class="dropdown-toggle footer-link" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Men
+                                Hombre
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -201,7 +198,7 @@
                         <div class="dropdown mb-4">
                             <a class="dropdown-toggle footer-link" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Accesories
+                                Accesorios
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Action</a></li>

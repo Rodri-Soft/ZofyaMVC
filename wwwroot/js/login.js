@@ -280,6 +280,15 @@ $(document).ready(function () {
         validateRePassword();
     });
 
+    var errorAlertElement = document.getElementById("errorAlert");
+    var errorMessage = errorAlertElement.textContent;
+    if(errorMessage != ""){
+        
+        $("#errorAlert").addClass("alert");
+        $("#errorAlert").addClass("alert-danger");
+        errorAlertElement.style.fontWeight = 400;
+    }
+
 });
 
 
@@ -429,6 +438,11 @@ function addCustomer() {
             enableRegisterButton();
         }
     });
+}
+
+function disableLoginButton() {
+    // document.getElementById("button-logIn").setAttribute("disabled", "");  
+    $("#button-logIn").addClass("disabled");
 }
 
 function disableRegisterButton() {

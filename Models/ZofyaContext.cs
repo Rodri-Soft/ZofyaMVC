@@ -281,6 +281,7 @@ namespace ZofyaMVC.Models
                 entity.HasOne(d => d.IDUserNavigation)
                     .WithMany(p => p.ShoppingCarts)
                     .HasForeignKey(d => d.IDUser)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_ShoppingCart_Customer");
             });
 

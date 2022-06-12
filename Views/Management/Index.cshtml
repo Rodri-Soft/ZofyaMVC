@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "_ZofyaManagementLayout";
+    ViewData["Title"] = "Zofya";
+}
+
+@section Styles {
+<link rel="stylesheet" href="~/css/zofya_management_mainpage_style.css" />
+}
+
+<section id="header">
+    <div class="container-xxl">
+        @* <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e6b30e" class="bi bi-house"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+            d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2
+            13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+            <path fill-rule="evenodd"
+            d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293
+            1.5z" />
+            </svg> <a class="navbar-brand theme-text" href="#">
+            &nbsp;Better Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link act" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Our Services</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            </ul>
+
+            </div>
+            </div>
+            </nav> *@
+        <!-- navbar code -->
+        <div class="row">
+            <div class="middle column col-12 col-md-6 title-style d-flex align-items-center justify-content-center">
+                <div class="row">
+                    <div class="column col-12 d-flex align-items-center justify-content-center">
+                        <h1 class="text-white display-3 brand-zofya">
+                            Zofya
+                        </h1>
+                    </div>
+                     <div class="column col-12 d-flex align-items-center justify-content-center">
+                        <h4 class="text-white display-3 brand-zofya">
+                            Show us what you're loving
+                        </h4>
+                    </div>
+                </div>                                                
+            </div>
+            <div class="column col-12 col-md-6 d-flex align-items-center justify-content-center">
+                <form class="form-style rounded-4 shadow-5-strong">
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form1Example1" class="form-control" />
+                        <label class="form-label" for="form1Example1">Email address</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form1Example2" class="form-control" />
+                        <label class="form-label" for="form1Example2">Password</label>
+                    </div>
+
+                    <!-- 2 column grid layout for inline styling -->
+                    <div class="row mb-4">
+                        <div class="col d-flex justify-content-center">
+                            <!-- Checkbox -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                                <label class="form-check-label" for="form1Example3"> Remember me </label>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block background-color-zofya">Login</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    
+</section>
+
+
+
+
+@section Scripts {
+@* <script src="/js/index.js"></script> *@
+}

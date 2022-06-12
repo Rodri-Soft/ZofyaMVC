@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ZofyaMVC.Models;
 using ZofyaMVC.Data;
@@ -15,13 +15,13 @@ using Newtonsoft.Json;
 
 namespace ZofyaMVC.Controllers;
 
-public class HomeController : Controller
+public class ManagementController : Controller
 {    
 
     private readonly ILogger<HomeController> _logger;    
     private DA_Customer _da_customer = new DA_Customer();
 
-    public HomeController(ILogger<HomeController> logger)
+    public ManagementController(ILogger<HomeController> logger)
     {
         _logger = logger;              
     }
@@ -29,21 +29,13 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         
-        SetUser();              
+        // SetUser();              
 
         return View();
     }
-
-    public IActionResult LogIn()
-    {
-       
-        SetUser();                  
-
-        return View();
-    }
-
+    
     [HttpPost]
-    public async Task<IActionResult> LogInForm(Customer customer)
+    public async Task<IActionResult> LogIn(Customer customer)
     {
         SetUser();      
         

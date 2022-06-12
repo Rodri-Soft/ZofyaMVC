@@ -1,12 +1,109 @@
-﻿@{
-    Layout = "_ZofyaLayout";    
-    ViewData["Title"] = "Zofya";    
+@model ZofyaMVC.Models.Customer
+
+@{
+    Layout = "_ZofyaAccessLayout";
+    ViewData["Title"] = "Zofya";
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/zofya_mainpage_style.css"/>
-
+    <link rel="stylesheet" href="~/css/zofya_mainpage_style.css" />
 }
+
+<h1>@ViewData["UserTest"]</h1>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark background-dark" style="padding-bottom: 5px!important;">
+    <div id="container-fluid-flex" class="container-fluid">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-md-0" asp-controller="Access" asp-action="Index">
+                <h2 class="brand-zofya brand-zofya-logo">Zofya</h2>
+            </a>
+            <ul class="navg-center navbar-nav mb-2 mb-md-0">
+                <li class="nav-item dropdown">
+                    <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Mujer
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Hombre
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="dropdown-style nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Accesorios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="right-elements d-flex align-items-center">
+            <a class="text-reset me-3 link-text-style" href="#">
+                <i class="fa fa-heart"><span id="icon-amount-wishlist"
+                        class="translate-middle badge rounded-pill bg-danger">1</span></i>
+                Wishlist
+            </a>
+
+            <a class="text-reset me-3 link-text-style" href="#">
+                <i class="fa fa-cart-shopping"><span id="icon-amount-cart-shopping"
+                        class="translate-middle badge rounded-pill bg-danger">1</span></i>
+                My Cart
+            </a>
+
+            <div class="dropdown">
+                <a class="link-text-style text-reset dropdown-toggle d-flex align-items-center" href="#"
+                    id="navbar-dropdown-user" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i id="user-account-icon" class="fa fa-user" style="margin-right: 5px;"></i>
+                    @Model.FullName
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" style="margin-right: 50%;" aria-labelledby="navbarDropdown">                    
+                    <li>
+                        <a class="dropdown-item" href="#">My profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Access" asp-action="LogOut">Logout</a>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a class="dropdown-item" href="#">Test</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+</nav>
 
 <main id="main">
     <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel" data-pause="false">
@@ -58,7 +155,8 @@
         <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 g-4">
 
             <div class="col bg-image hover-zoom">
-                <img src="~/assets/images/webp/modelo-1.webp" class="card-img-top products-style-images" alt="Modelo 1" />
+                <img src="~/assets/images/webp/modelo-1.webp" class="card-img-top products-style-images"
+                    alt="Modelo 1" />
                 <a href="#!">
                     <div class="mask">
                         <div class="d-flex justify-content-center align-items-center h-100">
@@ -69,7 +167,8 @@
             </div>
 
             <div class="col bg-image hover-zoom">
-                <img src="~/assets/images/webp/modelo-5.webp" class="card-img-top products-style-images" alt="Modelo 5" />
+                <img src="~/assets/images/webp/modelo-5.webp" class="card-img-top products-style-images"
+                    alt="Modelo 5" />
                 <a href="#!">
                     <div class="mask">
                         <div class="d-flex justify-content-center align-items-center h-100">
@@ -136,9 +235,9 @@
                         <h2 class="display">Discover the world of <span class="brand-zofya">Zofya</span></h2>
                         <p class="mt-4">Subscribe Zofya and be the first to receive the latest news on trends, new
                             product launches and exclusive offers.</p>
-                        <button id="buttonSignUp" type="button" 
-                         class="btn btn-dark button-signup mt-2" data-mdb-ripple-color="dark">
-                         sign up
+                        <button id="buttonSignUp" type="button" class="btn btn-dark button-signup mt-2"
+                            data-mdb-ripple-color="dark">
+                            sign up
                         </button>
                     </div>
                 </div>
@@ -148,5 +247,5 @@
 </section>
 
 @section Scripts {
-    <script src="/js/index.js"></script>
+<script src="/js/index.js"></script>
 }
