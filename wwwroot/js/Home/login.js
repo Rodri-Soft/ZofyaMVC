@@ -292,56 +292,56 @@ $(document).ready(function () {
 });
 
 
-function signIn() {
+// function signIn() {
 
-    $(document).ready(function () {
+//     $(document).ready(function () {
 
-        var logInEmail = $("#validationCustom-login-email").val();
-        var logInPassword = $("#validationCustom-login-password").val();
+//         var logInEmail = $("#validationCustom-login-email").val();
+//         var logInPassword = $("#validationCustom-login-password").val();
 
-        var customer = {
+//         var customer = {
 
-            "email": logInEmail,
-            "password": logInPassword
-        };
+//             "email": logInEmail,
+//             "password": logInPassword
+//         };
 
-        $.ajax({
+//         $.ajax({
 
-            method: "POST",
-            url: urlServer + "/LogIn",
-            cache: false,
-            processData: false,
-            contentType: "application/json",
-            data: JSON.stringify(customer)
+//             method: "POST",
+//             url: urlServer + "/LogIn",
+//             cache: false,
+//             processData: false,
+//             contentType: "application/json",
+//             data: JSON.stringify(customer)
 
-        }).done(function (data) {
+//         }).done(function (data) {
 
-            if (data.correct) {
+//             if (data.correct) {
 
-                var successMessages = data.message;
-                showAlert(successMessages, false, false);
+//                 var successMessages = data.message;
+//                 showAlert(successMessages, false, false);
 
-                $("#validationCustom-login-email").removeClass("active");
-                $("#validationCustom-login-email").val("");
+//                 $("#validationCustom-login-email").removeClass("active");
+//                 $("#validationCustom-login-email").val("");
 
-                $("#validationCustom-login-password").removeClass("active");
-                $("#validationCustom-login-password").val("");
-
-
+//                 $("#validationCustom-login-password").removeClass("active");
+//                 $("#validationCustom-login-password").val("");
 
 
-            } else {
 
-                var errorMessages = data.message;
-                showAlert(errorMessages, true, false);
 
-            }
+//             } else {
 
-        }).fail(function (jqXHR, textStatus) {
-            showRequestErrors(jqXHR, textStatus, false);
-        });
-    });
-}
+//                 var errorMessages = data.message;
+//                 showAlert(errorMessages, true, false);
+
+//             }
+
+//         }).fail(function (jqXHR, textStatus) {
+//             showRequestErrors(jqXHR, textStatus, false);
+//         });
+//     });
+// }
 
 function addCustomer() {
 
@@ -438,11 +438,6 @@ function addCustomer() {
             enableRegisterButton();
         }
     });
-}
-
-function disableLoginButton() {
-    // document.getElementById("button-logIn").setAttribute("disabled", "");  
-    $("#button-logIn").addClass("disabled");
 }
 
 function disableRegisterButton() {

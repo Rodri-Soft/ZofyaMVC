@@ -5,7 +5,7 @@
 }
 
 @section Styles {
-<link rel="stylesheet" href="~/css/zofya_loginpage_style.css" />
+<link rel="stylesheet" href="~/css/Home/zofya_loginpage_style.css" />
 }
 
 <main id="main">
@@ -49,8 +49,8 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     
-                    <button id="button-logIn" type="submit" class="btn btn-primary btn-block mb-4 login-gap"
-                        onclick="disableLoginButton();">Login</button>
+                    <button id="button-logIn" type="submit"
+                     class="btn btn-primary btn-block mb-4 login-gap">Login</button>
                     <div class="text-center">
                         <p>Not a member? <a id="register-link" href="#">Register</a></p>
                     </div>
@@ -203,5 +203,5 @@
 </main>
 
 @section Scripts {
-<script src="/js/login.js"></script>
+<script src="/js/Home/login.js"></script>
 }

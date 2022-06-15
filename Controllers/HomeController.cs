@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ZofyaMVC.Models;
-using ZofyaMVC.Data;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
@@ -19,25 +18,24 @@ public class HomeController : Controller
 {    
 
     private readonly ILogger<HomeController> _logger;    
-    private DA_Customer _da_customer = new DA_Customer();
-
+    
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;              
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         
-        SetUser();              
+        await SetUser();              
 
         return View();
     }
 
-    public IActionResult LogIn()
+    public async Task<IActionResult>  LogIn()
     {
        
-        SetUser();                  
+        await SetUser();                  
 
         return View();
     }
@@ -45,58 +43,43 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> LogInForm(Customer customer)
     {
-        SetUser();      
+        await SetUser();      
         
         var customerEmailField = customer.Email;
         var customerPasswordField = customer.Password;
                                
         if ((!String.IsNullOrEmpty(customerEmailField)) && (!String.IsNullOrEmpty(customerPasswordField)))
-        {                                               
-
-            // DA_Customer _da_customer = new DA_Customer();
+        {                                                           
 
             string customerPassword = Encrypt.GetSHA256(customer.Password);
             customer.Password = customerPassword;
+                        
+            var customerFound = await PostFindCustomerAsync(customer.Email, customer.Password);
 
-            var customerExits = _da_customer.CustomerValidation(customer.Email, customer.Password);
-
-
-            if (customerExits)
+            if (customerFound != null)
             {
                             
-                ViewBag.InvalidCredentials = "";  
-                Customer customerFound = _da_customer.FindCustomer(customer.Email);
-
-                if (customerFound != null)
-                {                    
+                ViewBag.InvalidCredentials = "";                                   
+                
+                var claims = new List<Claim>{
                     
-                    var claims = new List<Claim>{
-                        
-                        new Claim("Email", customer.Email),
-                        new Claim("Name", customerFound.FullName),
-                        new Claim("ID", customerFound.IDUser.ToString())                        
-                    };
+                    new Claim("Email", customer.Email),
+                    new Claim("Name", customerFound.FullName),
+                    new Claim("ID", customerFound.IDUser.ToString())                        
+                };
 
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
-                                                  new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(5), IsPersistent = true}  );                                                           
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
+                                                new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(5), IsPersistent = true}  );                                                           
 
-                    ViewData["User"] = customerFound.Email;
-
-                    // return View("Views/Access/Index.cshtml", customerFound);                                                     
-                    return RedirectToAction("Index", "Home");
-                   
-                }
-                else
-                {
-                    return View("Views/Home/LogIn.cshtml");                    
-                }
+                                                                                     
+                return RedirectToAction("Index", "Home");                                   
                 
             }
             else
             {                             
-                ViewBag.InvalidCredentials = "Invalid nickname and/or password";                
+                ViewBag.InvalidCredentials = "Invalid email and/or password";                
 
                 return View("Views/Home/LogIn.cshtml");                
             }
@@ -106,8 +89,7 @@ public class HomeController : Controller
 
             if(!ModelState.IsValid){
                 
-                ViewBag.EmailUser = String.IsNullOrEmpty(customer.Email);
-                ViewBag.PasswordUser = String.IsNullOrEmpty(customer.Password);
+                return View("Views/Home/LogIn.cshtml");    
                 
             }
 
@@ -116,7 +98,7 @@ public class HomeController : Controller
         }                                    
     }
 
-    public async void SetUser()
+    public async Task SetUser()
     {
         Claim userClaim = HttpContext.User.Claims.FirstOrDefault();
         
@@ -126,15 +108,12 @@ public class HomeController : Controller
             string userName = userNameClaim.Value;
             ViewData["User"] = userName;              
 
-            Claim userIDClaim = HttpContext.User.Claims.ElementAt(2); 
-            // System.Console.Error.WriteLine(userIDClaim.Value);           
-            string userID = userIDClaim.Value;
-            // ViewData["UserWishList"] = _da_customer.WishListNumber(userID);
-            // await GetWishListAsync(userId);                            
-                                                         
-            // ViewData["UserShoppingCart"] = _da_customer.ShoppingCartNumber(userID);
-            ShoppingCart userShoppingCart = _da_customer.GetUserShoppingCart(userID);
-            int productCounter = _da_customer.GetShoppingCartProductsNumber(userShoppingCart.IDShoppingCart);
+            Claim userIDClaim = HttpContext.User.Claims.ElementAt(2);                        
+            string userID = userIDClaim.Value;                                                                                                                       
+            
+            ShoppingCart userShoppingCart = await PostUserShoppingCartAsync(userID);                        
+            int productCounter = await PostShoppingCartProductsNumberAsync(
+                                        userShoppingCart.IDShoppingCart.ToString());
             
             if (productCounter > 0)
             {
@@ -147,41 +126,76 @@ public class HomeController : Controller
         {
             ViewData["User"] = "Account";                
         }            
-    }
+    }    
 
-    public async Task GetWishListAsync(string idUser)
+    // public async Task<ShoppingCart> GetUserShoppingCartAsync(string idUser)
+    // {
+        
+    //     ShoppingCart shoppingCart = new ShoppingCart();
+
+    //     try
+    //     {
+
+    //         var handler = new HttpClientHandler()
+    //         {
+    //             ServerCertificateCustomValidationCallback = 
+    //             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    //         };
+
+            
+    //         HttpClient client = new HttpClient(handler);
+    //         client.BaseAddress = new Uri("https://localhost:7004/");
+    //         client.DefaultRequestHeaders.Accept.Clear();
+    //         client.DefaultRequestHeaders.Accept.Add(
+    //             new MediaTypeWithQualityHeaderValue("application/json")); 
+            
+    //         HttpResponseMessage response = await client.GetAsync($"UserShoppingCart/{idUser}");
+            
+    //         if (response.IsSuccessStatusCode)
+    //         {
+               
+    //             shoppingCart = await response.Content.ReadAsAsync<ShoppingCart>();                                
+                
+    //         }                        
+
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         System.Console.Error.WriteLine(e);           
+    //     }           
+           
+    //     // System.Console.Error.WriteLine(shoppingCart.IDShoppingCart);
+    //     return shoppingCart;
+        
+    // }
+
+    public async Task<ShoppingCart> PostUserShoppingCartAsync(string idUser)
     {
         
-        List<WishList> wishList = new List<WishList>();
-        Int32 wishListNumber = new Int32();
+        ShoppingCart shoppingCart = new ShoppingCart();
 
         try
         {
 
             var handler = new HttpClientHandler()
             {
-                ServerCertificateCustomValidationCallback = 
-                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            
 
             HttpClient client = new HttpClient(handler);
             client.BaseAddress = new Uri("https://localhost:7004/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json")); 
-            
-            HttpResponseMessage response = await client.GetAsync($"WishListNumber/{idUser}");
-            
+                new MediaTypeWithQualityHeaderValue("application/json"));           
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                                                "PostUserShoppingCart", new {ID=idUser.ToString()});
+                        
             if (response.IsSuccessStatusCode)
-            {
-               
-                wishListNumber = await response.Content.ReadAsAsync<Int32>();
-                
-                // System.Console.Error.WriteLine(wishList[0].Name);
-                // System.Console.Error.WriteLine(wishList[0].IDUser);
-                
+            {               
+                shoppingCart = await response.Content.ReadAsAsync<ShoppingCart>();                                                
             }                        
 
         }
@@ -189,10 +203,89 @@ public class HomeController : Controller
         {
             System.Console.Error.WriteLine(e);           
         }           
-           
-        // System.Console.Error.WriteLine(wishListNumber);
-        ViewData["UserWishList"] = wishListNumber;
+                   
+        return shoppingCart;        
+    }
+
+    public async Task<Int32> PostShoppingCartProductsNumberAsync(string idShoppingCart)
+    {
         
+        Int32 shoppingCartProductsNumber =  new Int32();
+
+        try
+        {
+
+            var handler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+
+            HttpClient client = new HttpClient(handler);
+            client.BaseAddress = new Uri("https://localhost:7004/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));           
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                                                "PostShoppingCartProductsNumber", new {ID=idShoppingCart.ToString()});
+                        
+            if (response.IsSuccessStatusCode)
+            {               
+                shoppingCartProductsNumber = await response.Content.ReadAsAsync<Int32>();                                                
+            }
+            else
+            {
+                shoppingCartProductsNumber = 0;
+            }                        
+
+        }
+        catch (Exception e)
+        {
+            System.Console.Error.WriteLine(e);   
+            shoppingCartProductsNumber = 0;        
+        }           
+                   
+        return shoppingCartProductsNumber;        
+    }
+
+    public async Task<Customer> PostFindCustomerAsync(string email, string password)
+    {
+        
+        Customer customer = new Customer();
+
+        try
+        {
+
+            var handler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+
+            HttpClient client = new HttpClient(handler);
+            client.BaseAddress = new Uri("https://localhost:7004/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));           
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                                    "PostFindCustomer", new {Email=email.ToString(), Password=password.ToString()});
+                        
+            if (response.IsSuccessStatusCode)
+            {               
+                customer = await response.Content.ReadAsAsync<Customer>();                                                
+            }                        
+
+        }
+        catch (Exception e)
+        {
+            System.Console.Error.WriteLine(e);           
+        }           
+                   
+        return customer;        
     }
 
     public async Task<IActionResult> LogOut()
