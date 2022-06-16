@@ -291,58 +291,6 @@ $(document).ready(function () {
 
 });
 
-
-// function signIn() {
-
-//     $(document).ready(function () {
-
-//         var logInEmail = $("#validationCustom-login-email").val();
-//         var logInPassword = $("#validationCustom-login-password").val();
-
-//         var customer = {
-
-//             "email": logInEmail,
-//             "password": logInPassword
-//         };
-
-//         $.ajax({
-
-//             method: "POST",
-//             url: urlServer + "/LogIn",
-//             cache: false,
-//             processData: false,
-//             contentType: "application/json",
-//             data: JSON.stringify(customer)
-
-//         }).done(function (data) {
-
-//             if (data.correct) {
-
-//                 var successMessages = data.message;
-//                 showAlert(successMessages, false, false);
-
-//                 $("#validationCustom-login-email").removeClass("active");
-//                 $("#validationCustom-login-email").val("");
-
-//                 $("#validationCustom-login-password").removeClass("active");
-//                 $("#validationCustom-login-password").val("");
-
-
-
-
-//             } else {
-
-//                 var errorMessages = data.message;
-//                 showAlert(errorMessages, true, false);
-
-//             }
-
-//         }).fail(function (jqXHR, textStatus) {
-//             showRequestErrors(jqXHR, textStatus, false);
-//         });
-//     });
-// }
-
 function addCustomer() {
 
     $(document).ready(function () {
