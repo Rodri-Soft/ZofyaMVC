@@ -1,0 +1,30 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Carrito de Compras";
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/Cart/zofya_cartpage_style.css"/>
+}
+
+<nav class="navigation">
+  <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+  <span class="display-8">&lt;</span>
+  <a class="navigation">Carrito</a>
+</nav>
+
+<section class="d-flex justify-content-center">
+  <div class="container row" style="background-color: red;">
+    <div class="col-md-5">
+      <img class="img-fluid py-3" src="~/assets/images/webp/modelo-cv-3.webp" onerror="this.parentNode.removeChild(this)">
+    </div>
+
+    <div class="col-md-7">
+      <div class="row"></div>
+    </div>
+  </div>
+</section>
+
+@section Scripts { 
+  <script src="~/js/Items/cart.js"></script>  
+}

@@ -1,0 +1,19 @@
+:root {
+  --main--color: rgba(34, 40, 49, 1)!important;
+  --chips: #f7f7f7;
+  --selection-button: #c66;
+}
+
+.navigation {
+  padding-top: 85px;
+}
+
+.navigation a {
+  color: #000;
+  margin: 20px;
+  font-weight: 300;
+}
+
+.navigation a:hover {
+  color: #c66;
+}

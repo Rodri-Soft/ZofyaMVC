@@ -1,0 +1,93 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Zofya";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Items/zofya_itempage_style.css"/>
+}
+
+<nav id="main">
+  <section class="navigation">
+    <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+    <span class="display-8">&lt;</span>
+    <a class="navigation" href="">Mujer</a>
+    <span class="display-8">&lt;</span>
+    <a class="navigation" asp-controller="Items" asp-action="WomensClothing">Blusas</a>
+    <span class="display-8">&lt;</span>
+    <a id="item-name-navigation"></a>
+  </section> 
+  <hr> 
+</nav>
+
+<section class="item-information row m-0">
+  <div class="container col-md-6 row mb-4">
+    <div class="item-images-zoom col-2">
+      <img class="item-image img-fluid pb-2 mx-3" id="item-image-1" onerror="this.parentNode.removeChild(this)"
+        onclick="changeSelectedImage(this)" />
+      <img class="item-image img-fluid pb-2 mx-3" id="item-image-2" onerror="this.parentNode.removeChild(this)"
+        onclick="changeSelectedImage(this)" />
+      <img class="item-image img-fluid pb-2 mx-3" id="item-image-3" onerror="this.parentNode.removeChild(this)"
+        onclick="changeSelectedImage(this)" />
+      <img class="item-image img-fluid pb-2 mx-3" id="item-image-4" onerror="this.parentNode.removeChild(this)"
+        onclick="changeSelectedImage(this)" />
+    </div>
+    <div class="item-gallery col-10 hover-zoom">
+      <img class="item-image-selected img-fluid" id="item-image-selected" onerror="this.parentNode.removeChild(this)" />
+    </div>
+  </div>
+
+  <div class="container col-md-6 px-3">
+    <h2 id="item-name"></h2>
+    <p id="item-sku"></p>
+    <h2 id="item-price"></h2>
+    <p>
+      <i class="fa-solid fa-truck"></i>
+      Envío gratis a todo el país
+    </p>   
+    <p id="item-description"></p>
+    <p>Color:</p>
+    <div class="col-6" id="item-colors"></div>
+    <p>Tamaño:</p>
+    <div id="item-sizes"></div>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed px-1" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            Cuidados
+          </button>
+        </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse"  aria-labelledby="flush-headingOne"
+          data-mdb-parent="#accordionFlushExample">
+        <div id="item-care" class="accordion-body"></div>
+      </div>
+    </div>
+
+    <button class="btn btn-dark mt-5" id="button-add-item">
+      <p>
+        <i class="fa fa-cart-shopping"></i>
+        AGREGAR AL CARRITO
+      </p>
+    </button>
+
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" data-mdb-toggle="dropdown"
+        aria-expanded="false" id="button-add-wishlist">
+        <p>
+          <i class="fa fa-heart"></i>
+          AGREGAR A LISTA DE DESEOS
+        </p>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><button class="dropdown-item" type="button">Action</button></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+
+@section Scripts { 
+  <script src="~/js/Items/item.js"></script>  
+}

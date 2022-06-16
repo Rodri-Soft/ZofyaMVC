@@ -1,0 +1,234 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Zofya";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Items/zofya_womensclothing_style.css"/>
+}
+
+<main id="main">
+  <section id="zofya-page-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div id="zofya-header" class="col p-0 bg-image">
+          <img src="~/assets/images/webp/modelo-cv-2.webp" id="zofya-header-img" class="img-fluid" alt="modelo-10">
+          <div class="mask mask-mision"></div>
+          <div class="zofya-header-text">
+            <h1>Blusas</h1>                  
+            <p>MUJER</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <nav class="navigation">
+    <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+    <span class="display-8">&lt;</span>
+    <a class="navigation" href="">Mujer</a>
+    <span class="display-8">&lt;</span>
+    <a>Blusas</a>
+  </nav> 
+  <hr> 
+</main>
+
+<aside>
+  <h2 class="brand-zofya brand-zofya-logo display-1 text-center">ZOFYA</h2>
+  <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel" data-pause="false">
+    <div class="carousel-inner h-100" data-pause="false">
+    
+      <div class="carousel-item active bg-image" data-bs-interval="100">
+      
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-19.webp" class="d-block w-100" alt="Fissure in Sandstone" />
+          <div class="layer">
+            <h5>Jeans</h5>
+          </div>
+        </div>
+
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-20.webp" class="d-block w-100" alt="Fissure in Sandstone"/>
+          <h5>Blusas</h5>
+        </div>
+
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-17.webp" class="d-block w-100" alt="Fissure in Sandstone"/>
+          <h5>Playeras</h5>
+        </div>
+      </div>
+
+      <div class="carousel-item bg-image" data-bs-interval="100">
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-16.webp" class="d-block w-100" alt="Fissure in Sandstone"/>
+          <h5>Vestidos</h5>
+        </div>
+        
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-15.webp" class="d-block w-100" alt="Fissure in Sandstone"/>
+          <h5>Chamarras</h5>
+        </div>
+
+        <div class="model-header-img text-center hover-zoom">
+          <img src="~/assets/images/webp/modelo-cv-18.webp" class="d-block w-100" alt="Fissure in Sandstone"/>
+          <h5>Pijamas</h5>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls"
+            data-mdb-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls"
+            data-mdb-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <br>
+</aside>
+
+<aside>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="text-center">
+        <i class="fa-solid fa-sort"></i>
+        <span>ORDENAR POR</span>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <select class="form-select" aria-label="Ordenar por" name="filter-order"
+                id="filter-order">
+          <option value="DEFAULT" disabled selected hidden>
+            CRITERIO
+          </option>
+          <option value="alphabetically-ascending">Alfabéticamente, a-z</option>
+          <option value="alphabetically-descending">Alfabéticamente, z-a</option>
+          <option value="low-price">Precio, bajo a alto</option>
+          <option value="high-price">Precio, alto a bajo</option>
+        </select>
+      </div>
+    </div> 
+
+    <div class="row d-flex justify-content-center">
+      <div class="text-center" >
+          <i class="fa-solid fa-filter"></i>
+        <span>FILTROS</span>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <select class="form-select" aria-label="Ordenar por" name="filter-color"
+                id="filter-color">
+          <option value="COLOR" disabled selected hidden>COLOR</option>
+          <option value="#000">Negro</option>
+          <option value="#0000FF">Azul</option>
+          <option value="#FF0000">Rojo</option>
+          <option value="#FF8000">Naranja</option>
+          <option value="#800080">Morado</option>
+          <option value="#008000">Verde</option>
+          <option value="#FFFF00">Amarillo</option>
+          <option value="#FFF">Blanco</option>
+          <option value="#1E918C">Turquesa</option>   
+          <option value="#FFD1DC">Rosado</option>       
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <select class="form-select" aria-label="Ordenar por" name="filter-size" 
+                id="filter-size">
+          <option value="SIZE" class="text-center" disabled selected hidden>
+            TALLA
+          </option>
+          <option value="XXS">XXS</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>              
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <select class="form-select" aria-label="Ordenar por" name="filter-price"
+                id="filter-price">
+          <option value="PRICE" disabled selected hidden>PRECIO</option>
+          <option value="1">MEX$99.00 - MEX$199</option>
+          <option value="2">MEX$199.00 - MEX$299</option>
+          <option value="3">MEX$299.00 - MEX$399</option>
+          <option value="4">&gt; MEX$400.00</option>
+        </select>
+      </div>          
+    </div> 
+
+    <div class="container text-center">
+      <div id="selected-filters">
+
+      </div>
+    </div>
+  </div>  
+  <hr><br>
+</aside>
+
+<section> 
+  <div class="page-content">
+    <div class="container">
+      <div class="row" id="items">
+        <div class="col-12"></div>
+      </div>    
+      <template id="template-card">
+        <div class="col-12 col-md-4 mb-4">          
+          <div class="card h-100" id="item-card">      
+            <a class="example"id="item-achor" 
+              onclick="getURL($(this).attr('data-id'))">
+              <img id="item-image" class="img-card-top">
+            </a>
+            <div class="dropstart">
+              <button
+                type="button"
+                class="btn btn-primary btn-floating"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fas fa-heart"></i>
+              </button>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+
+            <div id="button-add-item" onclick="getURL($(this).attr('data-id'))">
+              <i class="fa fa-cart-shopping"></i>
+              <p>AGREGAR AL CARRITO</p>
+            </div>   
+
+            <div class="card-body">
+              <p id="item-name" class="item-information">Name</p>          
+              <strong>
+                <p id="item-price" class="item-information">Price</p>
+              </strong>
+              <div class="circle" class="item-information">
+                <div id="item-color"></div>
+              </div>      
+              <div id="item-sizes" class="item-information"></div>
+            </div>
+          </div>
+        </div>
+      </template>        
+      <div id="pagination-container"></div>      
+      <br>
+    </div>
+  </div> 
+</section>
+
+@section Scripts { 
+  <script src="~/js/Items/womensClothing.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+}

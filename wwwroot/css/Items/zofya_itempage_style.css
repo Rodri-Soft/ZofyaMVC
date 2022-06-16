@@ -1,0 +1,123 @@
+:root {
+  --main--color: rgba(34, 40, 49, 1)!important;
+  --chips: #f7f7f7;
+  --selection-button: #c66;
+}
+
+.navigation {
+  padding-top: 85px;
+}
+
+.navigation a {
+  color: #000;
+  margin: 20px;
+  font-weight: 300;
+}
+
+.navigation a:hover {
+  color: #c66;
+}
+
+@media (max-width: 1200px) {
+  .navigation a {
+    font-size: 12px;    
+    margin-right: 15px;
+  }
+
+  .navigation span {
+    margin-left: -10px;
+    font-size: 12px;   
+  }
+
+  .navigation {
+    padding-top: 80px;
+  }
+}
+
+section span {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.item-information {
+  font-weight: 100;
+  font-family: sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.item-image-selected {
+  z-index: 1;
+}
+
+.item-image {
+  opacity: 0.5;
+}
+
+.item-image:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.circle {  
+  transform: scale(25%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid #000;
+  background: var(--chips);
+  margin: 0 auto;
+  margin-top: -50px;
+  margin-bottom: -30px;
+  margin-left: -45px;
+  margin-right: -35px;
+  display: inline-flex;
+}
+
+.circle > div {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+#item-sizes > div {
+  text-decoration: none;
+  position: relative;  
+  display: inline-block;
+  text-align: center; 
+  vertical-align: middle;  
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  line-height: 50px;
+  height: 50px;
+  width: 70px;
+  font-size: 12pt;
+  margin-left: 4px;
+  margin-left: 4px;  
+  transition: background-color 0.3s linear 0.1s;
+  margin-bottom: 6px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+#item-sizes > :hover  {  
+  background-color: #000;
+  color: #fff;
+}
+
+#button-add-item, #button-add-wishlist {
+  margin-bottom: 35px;
+  width: 100%;
+  height: 50px;
+  background-color: var(--main--color);
+}
+
+#button-add-item > p, #button-add-wishlist > p {
+  line-height: 32px;
+  font-size: 11pt;
+}
+
+#button-add-item:hover, #button-add-wishlist:hover {
+  background-color: var(--selection-button);
+}
