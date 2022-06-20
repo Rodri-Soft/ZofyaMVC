@@ -35,7 +35,7 @@ function validateFullName() {
 
     var fullnameLength = registerFullname.length;
 
-    var pattern =  new RegExp(/^[0-9a-zA-ZÀ-ÿ\\u00f1\\u00d1]{1,}[0-9\\sa-zA-ZÀ-ÿ\\u00f1\\u00d1.:',_-]{0,}$/);
+    var pattern =  new RegExp(/^[0-9a-zA-ZÀ-ÿ\\u00f1\\u00d1]{1,}[0-9\sa-zA-ZÀ-ÿ\\u00f1\\u00d1.:',_-]{0,}$/);
     if(!pattern.test(registerFullname)){
         
         isCorrect = false;
@@ -152,14 +152,7 @@ function validatePassword() {
     var passwordLenght = registerPassword.length;
 
     // var pattern =  new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,16}$/);
-    var pattern =  new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-zÀ-ÿ\\u00f1\\u00d1\d$@$!%*?&#.$($)$-$_]{8,16}$/);
-    
-    if(!pattern.test(registerPassword)){
-        
-        isCorrect = false;
-        var field = document.getElementById("invalidPassword");
-        field.innerHTML = "Invalid Password Format.";
-    }
+    // var pattern =  new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-zÀ-ÿ\\u00f1\\u00d1\d$@$!%*?&#.$($)$-$_]{8,16}$/);        
 
     if ((registerPassword === "") ||
         ((passwordLenght < passwordMinLenght) || (passwordLenght > passwordMaxLength))) {
@@ -447,7 +440,7 @@ async function showAlert(errorMessages, isErrorAlert, isRegistration) {
     errorMessages.forEach(message => {
 
         if (message === "Invalid Password Format.") {
-            message = "Invalid password format. The password must have between 8 and 16 characters, at least one digit, at least 1 special character, at least one lower case, at least one upper case and no whitespace"
+            message = "Invalid password format. The password must have between 8 and 16 characters, at least one digit, at least 1 special character, at least one lower case, at least one upper case and no whitespace";
         }
 
         const alert = document.createElement('DIV');

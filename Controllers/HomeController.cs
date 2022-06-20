@@ -38,7 +38,7 @@ public class HomeController : Controller
         await SetUser();                  
 
         return View();
-    }
+    }   
 
     [HttpPost]
     public async Task<IActionResult> LogInForm(Customer customer)
@@ -109,7 +109,12 @@ public class HomeController : Controller
             ViewData["User"] = userName;              
 
             Claim userIDClaim = HttpContext.User.Claims.ElementAt(2);                        
-            string userID = userIDClaim.Value;                                                                                                                       
+            string userID = userIDClaim.Value;   
+
+            // Claim userEmailClaim = HttpContext.User.Claims.ElementAt(0);                        
+            // string userEmail = userEmailClaim.Value;           
+
+            // ViewData["UserClientEmail"] = userEmail;                                                                                                                      
             
             ShoppingCart userShoppingCart = await PostUserShoppingCartAsync(userID);                        
             int productCounter = await PostShoppingCartProductsNumberAsync(
@@ -127,7 +132,7 @@ public class HomeController : Controller
             ViewData["User"] = "Account";                
         }            
     }    
-
+      
     // public async Task<ShoppingCart> GetUserShoppingCartAsync(string idUser)
     // {
         

@@ -101,7 +101,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li>
-                                <a class="dropdown-item" href="#">My profile</a>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Index">My profile</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">Settings</a>

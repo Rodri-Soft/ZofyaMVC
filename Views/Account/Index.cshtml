@@ -1,0 +1,206 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Zofya";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Account/zofya_accountpage_style.css" />
+}
+
+
+<div class="container">
+    <div id="pageContent" class="form-table">       
+
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="updateDialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button id="buttonClose" type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"
+                        onclick="hideUpdateModal();"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form class="needs-validation" id="updateForm" novalidate>
+                        
+                        <div class="row" style="margin: 3% 0;">
+
+                            <label id="updateNewLabel" for="updateNewLabel" class="col-12 col-lg-2 col-form-label">
+                                New Field:
+                            </label>   
+
+                            <div class="form-outline col-12 col-lg-8">
+                            
+                                <input type="text" id="updateInput" class="form-control" placeholder="Fill in the field">
+                                <label id="updateLabel" for="updateLabel" class="form-label">
+                                    Field
+                                </label>
+                                <div id="invalidField" class="invalid-feedback" style="margin-top: 1.5%;"></div>
+                             </div>
+
+                        </div> 
+                                               
+                       
+                    </form>
+
+
+                </div>
+                <div class="modal-footer" id="updateFormFooter">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" id="updateDialogPassword">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button id="buttonClosePassword" type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"
+                        onclick="hideUpdateModalPassword();"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="updateFormPassword">                        
+
+                        <div class="row" style="margin: 3% 0;">
+
+                            <label id="updateNewLabelCurrentPassword" for="updateNewLabelCurrentPassword" class="col-12 col-lg-2 col-form-label">
+                                Current Password:
+                            </label>
+
+                            <div class="form-outline col-12 col-lg-8">
+
+                                <input type="password" id="updateInputCurrentPassword" class="form-control" placeholder="Fill in the field">
+                                <label id="updateLabelCurrentPassword" for="updateLabelCurrentPassword" class="form-label">
+                                    Password
+                                </label>
+                                <div id="invalidFieldCurrentPassword" class="invalid-feedback"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="margin: 0 0 3% 0;">
+
+                            <label id="updateNewLabelNewPassword" for="updateNewLabelNewPassword" class="col-12 col-lg-2 col-form-label">
+                                New Password:
+                            </label>
+
+                            <div class="form-outline col-12 col-lg-8">
+
+                                <input type="password" id="updateInputNewPassword" class="form-control" placeholder="Fill in the field">
+                                <label id="updateLabelNewPassword" for="updateLabelNewPassword" class="form-label">
+                                    Password
+                                </label>
+                                <div id="invalidFieldNewPassword" class="invalid-feedback"></div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer" id="updateFormFooterPassword">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade top-modal" id="modalErrors" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Errors</h5>
+                    <button id="button-close-modal-errors" type="button" class="btn-close" data-mdb-dismiss="modal"
+                        aria-label="Close" onclick="hideModalErrors();"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-action-style" data-mdb-dismiss="modal"
+                        onclick="hideModalErrors();">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade top-modal" id="modalCorrectMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>                    
+                </div>
+                <div class="modal-body text-center">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-action-style" data-mdb-dismiss="modal"
+                        onclick="hideSuccessModal();">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCorrectUserAccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>                    
+                </div>
+                <div class="modal-body text-center">
+                   
+                </div>
+                <div class="modal-footer">
+                    
+                    <a class="btn btn-secondary" asp-controller="Home" asp-action="LogOut">Close</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCorrectUserInformation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>                    
+                </div>
+                <div class="modal-body text-center">                   
+                </div>
+                <div class="modal-footer">
+                    
+                    <a class="btn btn-secondary" asp-controller="Account" asp-action="UpdateUserInformation">Close</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/datatables.min.js"></script>
+    <script src="/js/Account/account.js"></script>
+    <script>
+
+       
+
+        downloadData();
+        
+        function downloadData() {
+
+            var userEmail = '@ViewData["UserClientEmail"]';             
+            
+            setCustomerInformation(userEmail);
+
+        }    
+        
+    </script>
+}
