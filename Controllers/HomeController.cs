@@ -71,7 +71,7 @@ public class HomeController : Controller
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
-                                                new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(5), IsPersistent = true}  );                                                           
+                                                new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(60), IsPersistent = true}  );                                                           
 
                                                                                      
                 return RedirectToAction("Index", "Home");                                   
@@ -111,7 +111,9 @@ public class HomeController : Controller
             Claim userIDClaim = HttpContext.User.Claims.ElementAt(2);                        
             string userID = userIDClaim.Value;                                                                                                                       
             
-            ShoppingCart userShoppingCart = await PostUserShoppingCartAsync(userID);                        
+            ShoppingCart userShoppingCart = await PostUserShoppingCartAsync(userID); 
+            ViewData["IDShoppingCart"] = userShoppingCart.IDShoppingCart;
+
             int productCounter = await PostShoppingCartProductsNumberAsync(
                                         userShoppingCart.IDShoppingCart.ToString());
             

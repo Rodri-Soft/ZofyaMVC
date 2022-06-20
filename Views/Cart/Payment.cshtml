@@ -1,0 +1,252 @@
+@using ZofyaMVC.ModelValidations
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Item Details";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Cart/zofya_paymentpage_style.css"/>
+}
+
+<nav class="navigation">
+  <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+  <span class="display-8">&lt;</span>
+  <a class="navigation" asp-controller="Cart" asp-action="Cart">Carrito de Compras</a>
+  <span class="display-8">&lt;</span>
+  <a class="navigation">Pago</a>
+</nav>
+
+<hr style="height: 0.1px;">
+
+<div id="payment" class="row p-5 m-0">
+  <div class="col-md-8">
+    <div class="row mb-4">
+      <p class="title-payment fs-3">1. Método de Envío</p>
+      <div class="col-12 px-4">
+        <div class="free-shipping container">
+          <p class="fst-italic fs-6 mt-4">
+            <i class="fa-solid fa-truck fa-bounce fs-4"></i>
+            Entrega a Domicilio
+          </p>
+          <p class="fs-6">
+            Recibe tu pedido en la comunidad de tu hogar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row px-4 container-address">
+      <p class="title-payment fs-3">2. Dirección de Envío</p>
+      <div class="dropdown text-center col-md-6">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="button-dropdown-address" data-mdb-toggle="dropdown"
+          aria-expanded="false">
+          Direcciones
+        </button>
+        @{
+          var addresses = ViewData["CustomerAddress"] as IList<Address>;
+          int count = 1;
+        }
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          @foreach (var address in ViewData["CustomerAddress"] as IList<Address>)
+          {
+            var fullAddress =  @address.StreetName + " #" + @address.OutSideNumber + " Col. " + @address.Colony + " CP " + @address.PostalCode + ", " + @address.City;
+            <li id='address-option-@count' data-id="@address.IDAddress/@fullAddress" onclick="showSelectedAddress(this);">
+              <button class="dropdown-item" type="button">
+                @fullAddress
+              </button>
+            </li>
+            count++;
+          }
+          @* <li><button class="dropdown-item" type="button">@addresses</button></li> *@
+          @* <li><button class="dropdown-item" type="button">@ViewData["CustomerAddress"]</button></li> *@
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <button class="btn" id="button-add-address" onclick="showModalRegisterAddress();">
+          <i class="fas fa-plus"></i>
+          AGREGAR DIRECCIÓN
+        </button>
+      </div>
+
+      <div id="container-address"></div>
+    </div>
+
+    <div class="row px-4" id="pay-container">
+      <p class="title-payment fs-3">3. Método de Pago</p>
+      <div id="paypal-button-container" class="text-center mt-2"></div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      @{
+        var shoppingCart = ViewData["ShoppingCart"] as ShoppingCart;
+        var itemsShoppingCart = ViewData["ItemShoppingCart"] as IList<AuxiliaryItemShoppingCart>;
+      }
+      <div class="cart-resumen mb-4">
+        <p class="fs-5 fw-bold mt-4">
+          Resumen
+        </p>
+        <hr>
+
+        <div class="row">
+          <p class="col-5">Total de productos: </p>
+          <p class="col-7 d-flex justify-content-end">@itemsShoppingCart.Count</p>
+        </div>
+
+        <div class="row">
+          <p class="col-8">Envío:</p>
+          <p class="col-4 d-flex justify-content-end">- -</p>
+        </div>
+
+        <hr>
+        <div class="row">
+          <p class="col-3">Total:</p>
+          <p class="col-9 d-flex justify-content-end" id="total-balance">$ @shoppingCart.TotalBalance MXN</p>
+          <div id="shopping-cart-id" data-id="@shoppingCart.IDShoppingCart"></div>
+          <div id="shopping-cart-customer" data-id="@shoppingCart.IDUser"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="items-cart row pb-3 m-0">
+        <p class="title-payment fs-5 mt-3">Productos</p>
+        <hr>
+        @{
+          foreach (var item in itemsShoppingCart)
+          {
+            <div class="col-md-5">
+              <img src="@item.ImageURL" id="zofya-header-img" class="img-fluid" alt="modelo-10">
+            </div>
+            <div class="col-md-7 px-0">
+              <div class="row">
+                <p class="title-payment fs-6 mt-2">@item.Name</p>
+              </div>
+
+              <div class="row mb-3 fs-6">
+                <div class="col-6">
+                  Color
+                  <div class="circle">
+                    <div class="item-color" style="background-color: @item.Color"></div>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  Tamaño
+                  <div id="item-sizes">
+                    <div>@item.SizeSelected</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  Cantidad              
+                  <p class="fw-bold fs-1">
+                    @item.QuantityOfItems
+                  </p>
+                </div>
+
+                <div class="col-6">
+                  Precio
+                  <div>
+                    <p class="fw-bold fs-6">
+                      $ @item.TotalItem MX
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>            
+            <hr>
+          }
+        }
+      </div>    
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCorrectMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-add-address" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Dirección</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation form-register p-3" id="form-register" novalidate>
+
+          <div class="form-outline mb-5">
+            <input type="text" id="validation-address-street-name" class="form-control" />
+            <label class="form-label" for="validation-address-street-name">Dirección</label>
+            <div id="invalid-street-name" class="invalid-feedback"></div>
+          </div>
+
+          <div class="form-outline mb-5">
+            <input type="text" id="validation-address-colony" class="form-control" />
+            <label class="form-label" for="validation-address-colony">Colonia</label>
+            <div id="invalid-colony" class="invalid-feedback"></div>
+          </div>
+
+          <div class="row mb-5">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="validation-address-out-sider-number" class="form-control" />
+                <label class="form-label" for="validation-address-out-sider-number">Número exterior</label>
+                <div id="invalid-out-sider-number" class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="validation-address-insider-number" class="form-control" />
+                <label class="form-label" for="validation-address-insider-number">Número interior</label>
+                <div id="invalid-insider-number" class="invalid-feedback"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="validation-address-postal-code" class="form-control" />
+                <label class="form-label" for="validation-address-postal-code">Código Postal</label>
+                <div id="invalid-postal-code" class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="validation-address-city" class="form-control" />
+                <label class="form-label" for="validation-address-city">Ciudad</label>
+                <div id="invalid-city" class="invalid-feedback"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <button type="button" class="btn" id="button-save-address" onclick='addAddress(@ViewData["userID"]);'>Guardar</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts { 
+  <script src="https://www.paypal.com/sdk/js?client-id=AdeHhKS_o_8TC50dGXXu_VimUQRSr6tAyxxJziVCRETxawcOicgdbHoy5v0WV-V1ChCGl7O1JIPc7JI2&currency=MXN"></script>
+
+  <script src="~/js/Cart/payment.js"></script>  
+}

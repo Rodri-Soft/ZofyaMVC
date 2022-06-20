@@ -1,3 +1,4 @@
+@using ZofyaMVC.ModelValidations
 @{
     Layout = "_ZofyaLayout";
     ViewData["Title"] = "Carrito de Compras";
@@ -10,21 +11,150 @@
 <nav class="navigation">
   <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
   <span class="display-8">&lt;</span>
-  <a class="navigation">Carrito</a>
+  <a class="navigation">Carrito de Compras</a>
 </nav>
 
-<section class="d-flex justify-content-center">
-  <div class="container row" style="background-color: red;">
-    <div class="col-md-5">
-      <img class="img-fluid py-3" src="~/assets/images/webp/modelo-cv-3.webp" onerror="this.parentNode.removeChild(this)">
-    </div>
+<hr style="height: 0.1px;">
+@{
+  <section class="shopping-cart mb-5">
+    <div class="row p-5 m-0 py-4">
+      <div class="col-md-8">
+        @{
+          var itemShoppingCart = ViewData["ItemShoppingCart"] as IList<AuxiliaryItemShoppingCart>;
+        }
+        @foreach (var item in ViewData["ItemShoppingCart"] as IList<AuxiliaryItemShoppingCart>)
+        {
+          <div class="row mb-4 border">
+            <div class="col-md-2">
+              <img class="img-fluid py-3" src="@item.ImageURL" onerror="this.parentNode.removeChild(this)">
+            </div>
 
-    <div class="col-md-7">
-      <div class="row"></div>
+            <div class="col-md-10">
+              <div class="row align-items-center">
+                <div class="col-9">
+                  <h4 class="pt-3">@item.Name</h4>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                  <i class="fa-solid fa-trash-can fs-4" style="color: #c66; cursor: pointer"
+                  data-id="@item.IDItemShoppingCart" onclick="deleteItemShoppingCart(this);"></i>
+                </div>
+              </div>
+              <div class="row text-center d-flex align-items-center justify-content-center">
+                <div class="row col-4">
+                  <div class="col-6 p-0">
+                    Color
+                    <div class="circle">
+                      <div class="item-color" style="background-color: @item.Color;"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 ">
+                    Tamaño
+                    <div id="item-sizes">
+                      <div>@item.SizeSelected</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 pt-2">
+                  Precio
+                  <p>$@item.TotalItem MXN</p>
+                </div>
+                <div class="col-md-5 text-center">
+                  Cantidad
+                  <div class="btn-quantity input-group m-auto mb-3">
+                    <button class="btn-outline input-group-text" data-id="@item.IDItemShoppingCart"
+                    onclick="changeItemQuantity(this, false);">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input class="item-quantity form-control py-4 text-center" value="@item.QuantityOfItems" readonly>
+                    <button class="btn-outline input-group-text" data-id="@item.IDItemShoppingCart"
+                    onclick="changeItemQuantity(this, true);">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        @if (itemShoppingCart.Count == 0)
+        {
+          <small>
+            <p class="text-center">Tu Carrito Esta vacío</p>
+          </small>
+        }
+      </div>
+
+      <div class="col-md-4">
+        <div class="free-shipping container">
+          <p class="fst-italic fs-5 my-4">
+            <i class="fa-solid fa-truck fa-bounce fs-1 mx-2"></i>
+            ¡Envío gratis!
+          </p>
+        </div>
+        <div class="cart-resumen container mt-4">
+          <div class="row">
+            <p class="fs-5 fw-bold mt-4">
+              Resumen
+            </p>
+            <hr>
+            @{
+              var shoppingCart = @ViewData["ShoppingCart"] as ShoppingCart;
+            }
+            <div class="row">
+              <p class="col-5">Total de productos: </p>
+              <p class="col-7 d-flex justify-content-end">@itemShoppingCart.Count</p>
+            </div>
+
+            <div class="row">
+              <p class="col-8">Envío:</p>
+              <p class="col-4 d-flex justify-content-end">- -</p>
+            </div>
+
+            <hr>
+            <div class="row">
+              <p class="col-3">Total:</p>
+              <p class="col-9 d-flex justify-content-end">$ @shoppingCart.TotalBalance MXN</p>
+            </div>
+          </div>
+
+          @{
+            if (itemShoppingCart.Count > 0) 
+            {
+              <a class="btn btn-dark" id="button-pay-cart" asp-controller="Cart" asp-action="Payment">
+                <p>
+                  PROCEDER AL PAGO
+                </p>
+              </a>
+            }
+          }
+          
+        </div>
+        <a asp-controller="Home" asp-action="Index">
+          <button class="btn mt-4" id="button-continue-buying">
+            <p>CONTINUAR COMPRANDO</p>
+        </a>
+      </div>
+    </div>
+  </section>
+}
+
+<div class="toast-container position-fixed bottom-0 d-flex justify-content-center align-items-center w-100 pb-3 ">
+  <div class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" id="sucessToast">
+    <div class="d-flex p-2">
+      <div class="toast-body" id="toast-body-sucess">El producto se ha modificado correctamente del Carrito</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
-</section>
+
+  @* <div class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" id="errorToast">
+    <div class="d-flex p-2">
+      <div class="toast-body" id="toast-body-error">"Seleccione un Tamaño"</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div> *@
+</div>
+
 
 @section Scripts { 
-  <script src="~/js/Items/cart.js"></script>  
+  <script src="~/js/Cart/cart.js"></script>  
 }

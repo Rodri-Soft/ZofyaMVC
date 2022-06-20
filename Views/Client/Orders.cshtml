@@ -1,0 +1,35 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Pedidos";
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/Client/zofya_orderspage_style.css"/>
+}
+
+ <img src="~/assets/images/webp/modelo-cv-1.webp" id="zofya-header-img" class="img-fluid" alt="modelo-10">
+
+<nav class="navigation">
+  <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+  <span class="display-8">&lt;</span>
+  <a class="navigation">Pedidos</a>
+</nav>
+
+ <hr>
+
+ <h2 class="my-5 brand-zofya brand-zofya-logo text-center">Pedidos</h2>
+
+<div class="container text-center mb-5">
+  @foreach (var order in ViewData["OrderUser"] as IList<Order>)
+  {
+    <div class="row p-4 rounded" style="background-color: #FFC3D8;">
+      Fecha del Pedido: @order.Date, Fecha de Entrega: @order.DeliveryDate, Número de Pedido: @order.OrderNumber, Estatus: @order.Status, Total del Pedido: $ @order.TotalToPay MXN
+    </div>
+    <hr>
+  }
+</div>
+
+
+@section Scripts { 
+  <script src="~/js/Client/orders.js"></script>  
+}

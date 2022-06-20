@@ -75,17 +75,33 @@
                 </ul>
             </div>
 
-            <div class="right-elements d-flex align-items-center">
-                <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-heart" style="margin-right: 2px;"></i>
-                    Wishlist
-                </a>
+            <div class="right-elements d-flex align-items-center">        
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="text-reset me-3 link-text-style" asp-controller="Cart" asp-action="Cart" id="user-shopping-cart" data-id='@ViewData["IDShoppingCart"]'>
+                        <i class="fa fa-cart-shopping" style="margin-right: 0.5px;"><span id="icon-amount-cart-shopping"
+                                class="translate-middle badge rounded-pill bg-danger">@ViewData["UserShoppingCart"]</span></i>
+                        My Cart
+                    </a>
 
-                <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-cart-shopping" style="margin-right: 0.5px;"><span id="icon-amount-cart-shopping"
-                            class="translate-middle badge rounded-pill bg-danger">@ViewData["UserShoppingCart"]</span></i>
-                    My Cart
-                </a>
+                    <a class="text-reset me-3 link-text-style" asp-controller="Client" asp-action="Wishlist">
+                        <i class="fa fa-heart" style="margin-right: 2px;"></i>
+                    Wishlist
+                    </a>
+                }
+                else 
+                {
+                    <a class="text-reset me-3 link-text-style" asp-controller="Home" asp-action="LogIn">
+                        <i class="fa fa-cart-shopping" style="margin-right: 0.5px;"><span id="icon-amount-cart-shopping"
+                                class="translate-middle badge rounded-pill bg-danger">@ViewData["UserShoppingCart"]</span></i>
+                        My Cart
+                    </a>
+
+                    <a class="text-reset me-3 link-text-style" href="#">
+                        <i class="fa fa-heart" style="margin-right: 2px;"></i>
+                        Wishlist
+                    </a>
+                }
 
                 <div class="dropdown">
                     <a class="link-text-style text-reset dropdown-toggle d-flex align-items-center" href="#"
@@ -104,7 +120,7 @@
                                 <a class="dropdown-item" href="#">My profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" asp-controller="Client" asp-action="Orders">Orders</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" asp-controller="Home" asp-action="LogIn">Sign In</a>
