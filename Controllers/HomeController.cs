@@ -71,7 +71,7 @@ public class HomeController : Controller
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
-                                                new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(60), IsPersistent = true}  );                                                           
+                                                new AuthenticationProperties { ExpiresUtc = DateTime.Now.AddMinutes(5), IsPersistent = true}  );                                                           
 
                                                                                      
                 return RedirectToAction("Index", "Home");                                   
@@ -109,12 +109,7 @@ public class HomeController : Controller
             ViewData["User"] = userName;              
 
             Claim userIDClaim = HttpContext.User.Claims.ElementAt(2);                        
-            string userID = userIDClaim.Value;   
-
-            // Claim userEmailClaim = HttpContext.User.Claims.ElementAt(0);                        
-            // string userEmail = userEmailClaim.Value;           
-
-            // ViewData["UserClientEmail"] = userEmail;                                                                                                                      
+            string userID = userIDClaim.Value;                                                                                                                                   
             
             ShoppingCart userShoppingCart = await PostUserShoppingCartAsync(userID); 
             ViewData["IDShoppingCart"] = userShoppingCart.IDShoppingCart;
@@ -133,48 +128,7 @@ public class HomeController : Controller
         {
             ViewData["User"] = "Account";                
         }            
-    }    
-      
-    // public async Task<ShoppingCart> GetUserShoppingCartAsync(string idUser)
-    // {
-        
-    //     ShoppingCart shoppingCart = new ShoppingCart();
-
-    //     try
-    //     {
-
-    //         var handler = new HttpClientHandler()
-    //         {
-    //             ServerCertificateCustomValidationCallback = 
-    //             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-    //         };
-
-            
-    //         HttpClient client = new HttpClient(handler);
-    //         client.BaseAddress = new Uri("https://localhost:7004/");
-    //         client.DefaultRequestHeaders.Accept.Clear();
-    //         client.DefaultRequestHeaders.Accept.Add(
-    //             new MediaTypeWithQualityHeaderValue("application/json")); 
-            
-    //         HttpResponseMessage response = await client.GetAsync($"UserShoppingCart/{idUser}");
-            
-    //         if (response.IsSuccessStatusCode)
-    //         {
-               
-    //             shoppingCart = await response.Content.ReadAsAsync<ShoppingCart>();                                
-                
-    //         }                        
-
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         System.Console.Error.WriteLine(e);           
-    //     }           
-           
-    //     // System.Console.Error.WriteLine(shoppingCart.IDShoppingCart);
-    //     return shoppingCart;
-        
-    // }
+    }             
 
     public async Task<ShoppingCart> PostUserShoppingCartAsync(string idUser)
     {
