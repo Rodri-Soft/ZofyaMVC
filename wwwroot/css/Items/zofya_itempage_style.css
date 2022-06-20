@@ -121,3 +121,7 @@ section span {
 #button-add-item:hover, #button-add-wishlist:hover {
   background-color: var(--selection-button);
 }
+
+.toast-container {
+  width: 100px;
+}

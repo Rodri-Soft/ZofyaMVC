@@ -76,17 +76,35 @@
             </div>
 
             <div class="right-elements d-flex align-items-center">
-                <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-heart"><span id="icon-amount-wishlist"
-                            class="translate-middle badge rounded-pill bg-danger">@ViewData["UserWishList"]</span></i>
-                    Wishlist
-                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="text-reset me-3 link-text-style" asp-controller="Client" asp-action="Wishlist">
+                        <i class="fa fa-heart"><span id="icon-amount-wishlist"
+                                class="translate-middle badge rounded-pill bg-danger">@ViewData["UserWishList"]</span></i>
+                        Wishlist
+                    </a>
 
-                <a class="text-reset me-3 link-text-style" href="#">
-                    <i class="fa fa-cart-shopping"><span id="icon-amount-cart-shopping"
-                            class="translate-middle badge rounded-pill bg-danger">0</span></i>
-                    My Cart
-                </a>
+                    <a class="text-reset me-3 link-text-style" asp-controller="Client" asp-action="Orders">
+                        <i class="fa fa-cart-shopping"><span id="icon-amount-cart-shopping"
+                                class="translate-middle badge rounded-pill bg-danger">0</span></i>
+                        My Cart
+                    </a>    
+                } 
+                else 
+                {
+                    <a class="text-reset me-3 link-text-style" href="#">
+                        <i class="fa fa-heart"><span id="icon-amount-wishlist"
+                                class="translate-middle badge rounded-pill bg-danger">@ViewData["UserWishList"]</span></i>
+                        Wishlist
+                    </a>
+
+                    <a class="text-reset me-3 link-text-style" href="#">
+                        <i class="fa fa-cart-shopping"><span id="icon-amount-cart-shopping"
+                                class="translate-middle badge rounded-pill bg-danger">0</span></i>
+                        My Cart
+                    </a>  
+                }
+                
 
                 <div class="dropdown">
                     <a class="link-text-style text-reset dropdown-toggle d-flex align-items-center" href="#"
@@ -104,7 +122,7 @@
                                 <a class="dropdown-item" href="#">My profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" asp-controller="Client" asp-action="Orders">Orders</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" asp-controller="Home" asp-action="LogOut">Logout</a>

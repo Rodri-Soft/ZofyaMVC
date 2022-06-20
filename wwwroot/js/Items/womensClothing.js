@@ -61,7 +61,7 @@ const showItems = data => {
 function getItemSizes(item) {
   templateCard.querySelector("#item-sizes").innerHTML = "";
   let sizes = item.sizes;
-
+  
   for (const size of sizes) {
     templateCard.querySelector("#item-sizes").innerHTML += `<div>${size}</div>`;      
   }   

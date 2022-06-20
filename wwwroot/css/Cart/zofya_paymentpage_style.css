@@ -4,6 +4,12 @@
   --selection-button: #c66;
 }
 
+@media (max-width: 1199.98px) {
+  #button-add-address, #button-dropdown-address {
+    font-size: 11px;
+  }
+}
+
 .navigation {
   padding-top: 85px;
 }
@@ -14,8 +20,21 @@
   font-weight: 300;
 }
 
-.navigation a:hover {
-  color: #c66;
+.navigation a:hover, .title-payment {
+  color: var(--selection-button);
+}
+
+#payment {
+  color: #000;
+  font-weight: 100;
+  font-family: sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.free-shipping, .items-cart, .cart-resumen, #address-selected {
+  background-color: var(--chips);
+  border-radius: 5px;
+  border: #C1C1C1 2px;
+  border-style: dashed;
 }
 
 .circle {  
@@ -57,42 +76,16 @@
   font-size: 10pt;
 }
 
-.btn-quantity, .item-quantity {
-  width: 130px;
-  height: 50px;
-}
 
-.shopping-cart {
-  font-weight: 100;
-  font-family: sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-
-.free-shipping, .cart-resumen {
-  background-color: var(--chips);
-  border-radius: 5px;
-  border: #C1C1C1 2px;
-  border-style: dashed;
-}
-
-#button-pay-cart {
+#button-add-address, #button-dropdown-address, #button-save-address {
   margin-bottom: 35px;
   width: 100%;
   height: 50px;
   background-color: var(--main--color);
+  color: #fff;
 }
 
-#button-pay-cart > p {
-  line-height: 32px;
-  font-size: 11pt;
-}
 
-#button-pay-cart:hover {
+#button-add-address:hover, #button-dropdown-address:hover, #button-save-address:hover {
   background-color: var(--selection-button);
-}
-
-#button-continue-buying {
-  line-height: 20px;
-  font-size: 9pt;
-  width: 100%;
-  height: 40px;
 }

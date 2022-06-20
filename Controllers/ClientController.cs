@@ -17,13 +17,94 @@ using Microsoft.AspNetCore.Authorization;
 namespace ZofyaMVC.Controllers;
 
 [Authorize]
-public class CartController : Controller
+public class ClientController : Controller
 {
   private readonly ILogger<CartController> _logger;
 
-  public CartController(ILogger<CartController> logger)
+  public ClientController(ILogger<CartController> logger)
   {
     _logger = logger;
+  }
+
+  public async Task<List<Order>> PostUserOrderAsync(string idUser)
+  {
+    List<Order> orders = new List<Order>();
+    var handler = new HttpClientHandler()
+    {
+      ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+
+    HttpClient httpClient = new HttpClient(handler);
+    httpClient.BaseAddress = new Uri("https://localhost:7004/");
+    httpClient.DefaultRequestHeaders.Accept.Clear();
+    httpClient.DefaultRequestHeaders.Accept.Add(
+      new MediaTypeWithQualityHeaderValue("application/json")
+    );
+
+    HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+      "PostUserOrder", new { ID = idUser }
+    );
+
+    if (response.IsSuccessStatusCode)
+    {
+      orders = await response.Content.ReadAsAsync<List<Order>>();
+    }
+
+    return orders;
+  }
+
+  public async Task<List<Item_WishList>> PostUserItemsWishListAsync(string idUser)
+  {
+    List<Item_WishList> item_WishLists = new List<Item_WishList>();
+    var handler = new HttpClientHandler()
+    {
+      ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+
+    HttpClient httpClient = new HttpClient(handler);
+    httpClient.BaseAddress = new Uri("https://localhost:7004/");
+    httpClient.DefaultRequestHeaders.Accept.Clear();
+    httpClient.DefaultRequestHeaders.Accept.Add(
+      new MediaTypeWithQualityHeaderValue("application/json")
+    );
+
+    HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+      "PostItemWishlist", new { ID = idUser }
+    );
+
+    if (response.IsSuccessStatusCode)
+    {
+      item_WishLists = await response.Content.ReadAsAsync<List<Item_WishList>>();
+    }
+
+    return item_WishLists;
+  }
+
+  public async Task<List<WishList>> PostUserWishesListAsync(string idUser)
+  {
+    List<WishList> wishesLists = new List<WishList>();
+    var handler = new HttpClientHandler()
+    {
+      ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+
+    HttpClient httpClient = new HttpClient(handler);
+    httpClient.BaseAddress = new Uri("https://localhost:7004/");
+    httpClient.DefaultRequestHeaders.Accept.Clear();
+    httpClient.DefaultRequestHeaders.Accept.Add(
+      new MediaTypeWithQualityHeaderValue("application/json")
+    );
+
+    HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+      "PostUserWishesList", new { ID = idUser }
+    );
+
+    if (response.IsSuccessStatusCode)
+    {
+      wishesLists = await response.Content.ReadAsAsync<List<WishList>>();
+    }
+
+    return wishesLists;
   }
 
   public async Task<List<Address>> PostUserAddressAsync(string idUser)
@@ -180,24 +261,33 @@ public class CartController : Controller
 
       List<Address> address = await PostUserAddressAsync(userID);
       ViewData["CustomerAddress"] = address;
+
+      List<WishList> wishLists = await PostUserWishesListAsync(userID);
+      ViewData["WishListUser"] = wishLists;
+
+      List<Item_WishList> item_WishLists = await PostUserItemsWishListAsync(userID);
+      ViewData["itemWishList"] = item_WishLists;
+
+      List<Order> orders = await PostUserOrderAsync(userID);
+      ViewData["OrderUser"] = orders;
     }
   }
 
-  [Route("Carrito")]
-  public async Task<IActionResult> Cart()
+  [Route("Pedidos")]
+  public async Task<IActionResult> Orders()
   {
     await SetUser();
 
     return View();
   }
 
-  [Route("Carrito/Pago")]
-  public async Task<IActionResult> Payment()
+  [Route("Wishlist")]
+  public async Task<IActionResult> Wishlist()
   {
     await SetUser();
 
     return View();
-  } 
+  }
 
   [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
   public IActionResult Error()

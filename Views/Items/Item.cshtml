@@ -1,6 +1,6 @@
 @{
     Layout = "_ZofyaLayout";
-    ViewData["Title"] = "Zofya";
+    ViewData["Title"] = "Item Details";
 }
 
 @section Styles {
@@ -50,8 +50,9 @@
     <div class="col-6" id="item-colors"></div>
     <p>Tamaño:</p>
     <div id="item-sizes"></div>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-      <div class="accordion-item">
+                        
+    <div class="accordion accordion-flush " id="accordionFlushExample">
+      <div class="accordion-item mb-4">
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed px-1" type="button" data-mdb-toggle="collapse"
             data-mdb-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -63,30 +64,66 @@
         <div id="item-care" class="accordion-body"></div>
       </div>
     </div>
-
-    <button class="btn btn-dark mt-5" id="button-add-item">
-      <p>
-        <i class="fa fa-cart-shopping"></i>
-        AGREGAR AL CARRITO
-      </p>
-    </button>
-
-    <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle" type="button" data-mdb-toggle="dropdown"
-        aria-expanded="false" id="button-add-wishlist">
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+      <button class="btn btn-dark" id="button-add-item" onclick="addItemToCart();">
         <p>
-          <i class="fa fa-heart"></i>
-          AGREGAR A LISTA DE DESEOS
+          <i class="fa fa-cart-shopping"></i>
+          AGREGAR AL CARRITO
         </p>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><button class="dropdown-item" type="button">Action</button></li>
-      </ul>
-    </div>
+
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false"
+        id="button-add-wishlist">
+          <p>
+            <i class="fa fa-heart"></i>
+            AGREGAR A LISTA DE DESEOS
+          </p>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">            
+          @{
+            int count = 1;
+            foreach (var item in ViewData["UserWishesList"] as IList<WishList>)
+            {                          
+              <li><button id="wishlist-@count" class="dropdown-item" onclick="addItemToWishList(this);" type="button" value="@item.IDWishList">@item.Name</button></li>          
+              count++;
+            }
+          }
+        </ul>
+      </div>
+    } 
   </div>
 </section>
-<br>
-<br>
+
+<br><br>
+
+<div class="toast-container position-fixed bottom-0 d-flex justify-content-center align-items-center w-100 pb-3 ">
+  <div class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" id="sucessToast">
+    <div class="d-flex p-2">
+      <div class="toast-body" id="toast-body-sucess">El producto se ha añadido correctamente al Carrito</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" id="errorToast">
+    <div class="d-flex p-2">
+      <div class="toast-body" id="toast-body-error">"Seleccione un Tamaño"</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+@* 
+<div class="toast-container position-fixed bottom-0 d-flex justify-content-center align-items-center w-100 pb-3 ">
+  <div class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" id="errorToast">
+    <div class="d-flex p-2">
+      <div class="toast-body">"Seleccione un Tamaño"</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div> *@
 
 @section Scripts { 
   <script src="~/js/Items/item.js"></script>  

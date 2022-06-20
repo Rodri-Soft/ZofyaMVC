@@ -1,0 +1,108 @@
+@{
+    Layout = "_ZofyaLayout";
+    ViewData["Title"] = "Lista de Deseos";
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/Client/zofya_wishlistpage_style.css"/>
+}
+ <img src="~/assets/images/webp/modelo-cv-1.webp" id="zofya-header-img" class="img-fluid" alt="modelo-10">
+
+<nav class="navigation">
+  <a class="navigation" asp-controller="Home" asp-action="Index">Inicio</a>
+  <span class="display-8">&lt;</span>
+  <a class="navigation">Wishlist</a>
+</nav>
+<hr>
+
+<div class="container">
+  <div class="row p-4 py-0 pt-4">
+    <div class="col-4">
+      <div class="dropdown">
+        <button class="btn button dropdown-toggle" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+          WISHLIST
+        </button>
+        @{
+          int count = 1;
+        }
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          @foreach (var wishList in ViewData["WishListUser"] as IList<WishList>)
+          {
+            <li id='wishlist-option-@count' data-id="@wishList.IDWishList/@wishList.Name" onclick="showSelectedWishList(this);">
+              <button class="dropdown-item" type="button">
+                @wishList.Name
+              </button>
+            </li>
+            count++;
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <button class="btn button" onclick="showModalRegisterWishList();">
+        AGREGAR WISHLIST
+      </button>
+    </div>
+      
+    <div class="col-4">
+      <button class="btn button"  onclick="deleteWishList()";>
+        ELIMINAR WISHLIST
+      </button>
+    </div>
+  </div>
+
+  <div id="container-wishlist" class="mt-0 p-4">
+    <div class="wishlist-selected my-0 p-2 display-6 text-center" id="wish-selected">
+      <i class="fa-solid fa-star"></i>
+      Visualiza Tus Wishlist
+    </div>
+
+    <div></div>
+  </div>
+
+  <div id="container-items-wishlist" class="text-center mb-6">
+  </div>
+</div>
+
+<div class="modal" id="modal-add-wish-list" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Wish List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation form-register p-3" id="form-register" novalidate>
+
+          <div class="form-outline mb-5">
+            <input type="text" id="validation-wishlist-name" class="form-control" />
+            <label class="form-label" for="validation-wishlist-name">Nombre</label>
+            <div id="invalid-wishlist-name" class="invalid-feedback"></div>
+          </div>
+
+          <!-- Submit button -->
+          <button type="button" class="btn button" id="button-save-wishlist" onclick='addWishList(@ViewData["userID"]);'>Guardar</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCorrectMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center"></div>
+    </div>
+  </div>
+</div>
+
+@section Scripts { 
+  <script src="~/js/Client/wishlist.js"></script>  
+}

@@ -1,0 +1,73 @@
+:root {
+  --main--color: rgba(34, 40, 49, 1)!important;
+  --chips: #f7f7f7;
+  --selection-button: #c66;
+}
+
+.navigation {
+  padding-top: 20px;
+}
+
+.navigation a {
+  color: #000;
+  margin: 20px;
+  font-weight: 300;
+}
+
+.navigation a:hover {
+  color: #c66;
+}
+
+.button {
+  margin-bottom: 35px;
+  width: 100%;
+  height: 50px;
+  background-color: var(--main--color);
+  color: #fff;
+}
+
+.button:hover {
+  background-color: var(--selection-button);
+  color: #fff;
+}
+
+.wishlist-selected, .container-items-wishlist {
+  background-color: var(--chips);
+  border-radius: 5px;
+  border: #C1C1C1 2px;
+  border-style: dashed;
+  /* color: #000; */
+  font-weight: 100;
+  font-family: sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.container-items-wishlist {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.circle {  
+  position: relative;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 3px solid #000;
+  background: #fff;
+  margin: 0 auto;
+}
+
+.circle > div {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: orange;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#container-items-wishlist {
+  padding-bottom: 150px;
+}
