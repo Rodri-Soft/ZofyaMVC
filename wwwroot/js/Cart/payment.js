@@ -565,10 +565,11 @@ function registerOrder(orderNumber) {
   let date = new Date();
   date.setDate(date.getDate() + 15); 
   let deliveryDate = (date).toLocaleString("en-US");
+  const dateArray = deliveryDate.split(",");
 
   let order = {
     "date": actualDate,
-    "deliveryDate": deliveryDate,
+    "deliveryDate": dateArray[0],
     "orderNumber": orderNumber,
     "status": 'In Process',
     "totalToPay": totalBalanceInteger,
